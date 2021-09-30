@@ -46,6 +46,12 @@ namespace Fiap.Api.AspNet.Controllers
 
             var totalGeral = marcaRepository.Count();
             var totalPaginas = (int)Math.Ceiling((double)totalGeral / tamanho);
+
+            if (pagina > (totalPaginas - 1))
+            {
+                return NotFound();
+            }
+
             var anterior = pagina > 0 ? $"marca?pagina={pagina - 1}&tamanho={tamanho}" : "";
             var proximo = pagina < totalPaginas - 1 ? $"marca?pagina={pagina + 1}&tamanho={tamanho}" : "";
 
